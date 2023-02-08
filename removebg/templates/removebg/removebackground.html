@@ -1,0 +1,97 @@
+{% extends 'base.html'  %}
+
+{% block content %}
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+
+<style>
+input[type=file]::file-selector-button {
+
+  background-color: #ff8800;
+
+}
+.hide{
+    display: none;
+}
+
+</style>
+
+    <div class="container">
+        <div class="row">
+            <h1 style="margin-bottom: 3%; text-align: center;font-family: Georgia, 'Times New Roman', Times, serif;color: rgb(246, 246, 246);">Background Removal</h1>
+            {% if file_url %}
+
+
+            {% else %}
+            <div class="col-sm-4">
+
+            </div>
+            <div class="col-sm-4 text-center">
+                
+                <form action="{% url 'removal' %}" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+
+                    <input class="form-control" required type="file" id="fileInput" name="upload" accept="image/*">
+                    <br>
+                    <button class="mybutton btn btn-primary my-2 btn-lg" type="onsubmit">
+                        <i class="loading fa fa-spinner fa-spin hide"></i>
+                        <span id="btn-text">Remove Background</span>
+                    </button>
+
+                    
+
+                </form>
+            </div>
+            <div class="col-sm-4">
+                
+            </div>
+            {% endif %}
+        </div>
+    
+        <div class="row">
+        {% if file_url %}
+            <div class="col-lg-4">
+            
+            </div>
+            <div class="col-lg-4 text-center">
+                <img width="400" src="{{ file_url }}" class="img-fluid">
+                <br>
+                <a href="{{ file_url }}" download><button class="btn btn-success btn-lg my-5">Download</button></a>
+                <a class="btn btn-warning my-5 btn-lg" href="{% url 'remove' %}">Select Another Image</a>
+            {% else %}
+            <p id="text" align='center' style="padding-top: 5%;color: rgb(206, 206, 206);" >No photo added.</p>
+            {% endif %}
+            </div>
+            <div class="col-lg-4">
+            
+            </div>
+        </div>
+    </div>
+    <script>
+        const showSpinnerbtn = document.querySelector('.mybutton');
+        const revealSpinner = document.querySelector('.loading');
+        const buttonText = document.getElementById('btn-text')
+        const text = document.getElementById('text')
+        function spinner(){
+            if( document.getElementById("fileInput").files.length == 0 ){
+                
+            }else{
+                if (revealSpinner.classList.contains('hide')){
+                    revealSpinner.classList.remove('hide');
+                    setTimeout(function () { disableButton(); }, 0);
+                    function disableButton() {
+                        showSpinnerbtn.setAttribute("disabled", "true");
+                        buttonText.innerHTML = "Removing.....";
+                        text.innerHTML = "Uploading.....";
+                    }
+                    
+                    
+                }   
+            }
+        }
+        showSpinnerbtn.addEventListener('click',spinner);
+    </script>
+
+
+{% endblock %}
