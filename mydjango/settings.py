@@ -24,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = "django-insecure-$*d70o&es33=3yl0%9&=79_f&#6)el!$8j4-eh$cu!#!cpc9+3"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
@@ -50,8 +50,8 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
-    'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',
+    # 'django.middleware.security.SecurityMiddleware',
+    # 'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = "mydjango.urls"
@@ -127,12 +127,12 @@ USE_TZ = True
 # Here, they well be accessible at your-domain.onrender.com/static/...
 STATIC_URL = '/static/'
 #Following settings only make sense on production and may break development environments.
-if not DEBUG:    # Tell Django to copy statics to the `staticfiles` directory
-    # in your application directory on Render.
-    STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-    # Turn on WhiteNoise storage backend that takes care of compressing static files
-    # and creating unique names for each version so they can safely be cached forever.
-    STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+# if not DEBUG:    # Tell Django to copy statics to the `staticfiles` directory
+#     # in your application directory on Render.
+#     STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+#     # Turn on WhiteNoise storage backend that takes care of compressing static files
+#     # and creating unique names for each version so they can safely be cached forever.
+#     STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 #MEDIA_URL = '/media/'
 
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static'),]
