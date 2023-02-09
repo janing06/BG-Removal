@@ -16,9 +16,9 @@
             <h1 style="font-family:sans-serif;color: rgb(246, 246, 246);">Introduction</h1>
             <p style="font-family: Arial, Helvetica, sans-serif;color:rgb(246, 246, 246);">Background Removal is a tool for removing the background of photos, allowing users to isolate the subject of the image. The process is simple and straightforward, just upload the image, and It will start removing the background.</p>
             
-            <img width="400" src="{{ file_url }}" class="img-thumbnail" alt="">
+            <img width="400" src="{% static 'media/ex1.jpg' %}" class="img-thumbnail" alt="">
             <center><i class="fa fa-arrow-circle-down" style="font-size:100px;color:rgb(0, 211, 0);"></i></center>
-            <img width="400" src="{{ file_url_2 }}" class="img-thumbnail" style="background-color:rgb(40, 40, 40);margin-bottom: 10%;" alt="">
+            <img width="400" src="{% static 'media/ex1.png' %}" class="img-thumbnail" style="background-color:rgb(40, 40, 40);margin-bottom: 10%;" alt="">
         
         
             <center><a href="{% url 'remove' %}"><button class="btn btn-primary btn-lg">Let's Do It</button></a></center>
